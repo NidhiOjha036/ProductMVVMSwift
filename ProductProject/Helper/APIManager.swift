@@ -5,4 +5,11 @@
 //  Created by Nidhi on 26/01/24.
 //
 
-import Foundation
+import UIKit
+
+class APIManager {
+    
+    static let shared = APIManager()
+    private init(){}
+    
+}
