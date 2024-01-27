@@ -8,22 +8,71 @@
 import UIKit
 
 class ProductListVC: UIViewController {
+    
+    @IBOutlet weak var tblProduct: UITableView!
+    private var viewModel = ProductViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        configuration()
+        
+    }
+
+}
+
+extension ProductListVC {
+    
+    func configuration(){
+        tblProduct.dataSource = self
+        tblProduct.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "ProductCell")
+        
+        
+        initViewModel()
+        observeEvent()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func initViewModel(){
+        viewModel.fetchProducts()
     }
-    */
+    
+    //Data binding event observe
+    func observeEvent(){
+        viewModel.eventHandler = { [weak self] event in
+            
+            guard let self else { return }
+            
+            switch event {
+            case .loading:
+                print("loading")
+            case .stopLoading:
+                print("stop loading")
+            case .dataLoaded:
+                print("data loaded")
+                DispatchQueue.main.async {
+                    self.tblProduct.reloadData()
+                }
+            case .error(let error):
+                print(error)
+            }
+            
+            
+        }
+    }
+    
+}
 
+extension ProductListVC:UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.products.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tblProduct.dequeueReusableCell(withIdentifier: "ProductCell") as? ProductCell else { return UITableViewCell() }
+        let product = viewModel.products[indexPath.row]
+        cell.product = product
+        return cell
+    }
+    
+    
 }
