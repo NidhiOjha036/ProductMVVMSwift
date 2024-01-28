@@ -44,7 +44,7 @@ extension EndPointItems:EndPointType {
     }
     
     var method: HTTPMethods {
-        switch self{
+        switch self {
         case .products:
             return .get
         }
