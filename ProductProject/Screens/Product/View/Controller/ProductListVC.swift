@@ -18,18 +18,24 @@ class ProductListVC: UIViewController {
         configuration()
         
     }
+    
+    @IBAction func btnAddProductTapped(_ sender: UIBarItem) {
+        let product = AddProduct(title: "iPhone")
+        viewModel.addProduct(parameters: product)
+    }
+    
 
 }
 
 extension ProductListVC {
     
     func configuration(){
+        
         tblProduct.dataSource = self
         tblProduct.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "ProductCell")
-        
-        
         initViewModel()
         observeEvent()
+        
     }
     
     func initViewModel(){
@@ -54,6 +60,8 @@ extension ProductListVC {
                 }
             case .error(let error):
                 print(error)
+            case .newProductAdded(let newProduct):
+                print(newProduct)
             }
             
             
@@ -63,6 +71,7 @@ extension ProductListVC {
 }
 
 extension ProductListVC:UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.products.count
     }

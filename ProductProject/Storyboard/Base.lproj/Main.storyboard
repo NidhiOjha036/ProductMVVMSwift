@@ -30,7 +30,13 @@
                             <constraint firstItem="PEs-iI-WLm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rmN-dM-AAB"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Products" id="9ci-Ub-pZM"/>
+                    <navigationItem key="navigationItem" title="Products" id="9ci-Ub-pZM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="hi5-Sv-IeF">
+                            <connections>
+                                <action selector="btnAddProductTapped:" destination="BYZ-38-t0r" id="7hN-wM-YDc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tblProduct" destination="PEs-iI-WLm" id="SA3-pN-Xzi"/>
                     </connections>
@@ -38,6 +44,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1265" y="-63"/>
+        </scene>
+        <!--Add ProductVC-->
+        <scene sceneID="LGV-QA-HGn">
+            <objects>
+                <viewController storyboardIdentifier="AddProductVC" id="bVg-hd-fRc" customClass="AddProductVC" customModule="ProductProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MRa-Vp-gEG">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="veY-qt-34r"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbB-Ny-f8q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1985" y="-63"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oh9-c1-Fb4">
